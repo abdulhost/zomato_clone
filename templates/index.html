@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zomato Clone</title>
+</head>
+<body>
+    <h1>Welcome to Zomato Clone</h1>
+    {% if current_user.is_authenticated %}
+        <p>Hello, {{ current_user.username }}! <a href="{{ url_for('logout') }}">Logout</a></p>
+    {% else %}
+        <p><a href="{{ url_for('login') }}">Login</a> | <a href="{{ url_for('register') }}">Register</a></p>
+    {% endif %}
+
+    <h2>Restaurant Listings</h2>
+    <ul>
+        {% for restaurant in restaurants %}
+        <li>
+            <a href="{{ url_for('restaurant', id=restaurant.id) }}">{{ restaurant.name }}</a><br>
+            Location: {{ restaurant.location }}<br>
+            Description: {{ restaurant.description }}
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
